@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
  */
 class UserFactory extends Factory
 {
+    
     /**
      * The current password being used by the factory.
      */
@@ -26,6 +27,7 @@ class UserFactory extends Factory
         return [
             "full_name"=>$this->faker->name(),
             "email"=>$this->faker->unique()->safeEmail(),
+            "username"=>$this->faker->username(),
             "password"=>Hash::make("password"),
         ];
     }
