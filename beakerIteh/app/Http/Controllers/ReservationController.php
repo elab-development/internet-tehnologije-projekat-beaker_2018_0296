@@ -6,6 +6,8 @@ use App\Http\Resources\ReservationCollection;
 use Illuminate\Http\Request;
 use App\Http\Resources\ReservationResource;
 use App\Models\Reservation;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ReservationController extends Controller
 {
@@ -32,7 +34,30 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'pickup_date' => 'required|date',
+            'return_date' => 'required|date',
+            'user_id' => 'required|exists:users,id',
+            'vehicle_id' => 'required|exists:vehicles,id',
+
+        ]);
+
+
+        if ($validator ->fails()) {
+            return response()->json($validator->errors());
+        }
+
+        $reservation=Reservation::create([
+            'pickup_date'=>$request->pickup_date,
+            'return_date'=>$request->return_date,
+            'user_id' => Auth::id(),
+            'vehicle_id'=>$request->vehicle_id,
+            
+            
+        ]);
+
+        return response()->json(['Reservation is created successfully.', new ReservationResource($reservation)]);
+
     }
 
     /**
@@ -54,16 +79,59 @@ class ReservationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Reservation $reservation)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'pickup_date' => 'required|date',
+            'return_date' => 'required|date',
+            'vehicle_id' => 'required|exists:vehicles,id',
+        ]);
+    
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422); // 422 Unprocessable Entity
+        }
+    
+        $reservation->pickup_date = $request->pickup_date;
+        $reservation->return_date = $request->return_date;
+        $reservation->vehicle_id = $request->vehicle_id;
+    
+        $reservation->save();
+    
+        return response()->json(['message' => 'Reservation updated successfully', 'data' => new ReservationResource($reservation)], 200);
     }
+       /*
+        $validator = Validator::make($request->all(),[
+            'pickup_date'=>'required|date',
+            'return_date'=>'required|date',
+            'vehicle_id'=>'required',
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        ]);
+
+        if ($validator ->fails()) {
+            return response()->json($validator->errors());
+        }
+
+        $reservation->pickup_date = $request->pickup_date;
+        $reservation->return_date = $request->return_date;
+        $reservation->vehicle_id = $request->vehicle_id;
+        
+        $reservation->save();
+
+        return response()->json('Reservation updated successfully', new ReservationResource($reservation));
     }
+        */
+    
+     // Remove the specified resource from storage.
+     
+    public function destroy(Reservation $reservation)
+    {
+        $reservation->delete();
+
+        return response()->json('Reservation deleted successfully');
+        
+       
+
+
+    }
+    
 }

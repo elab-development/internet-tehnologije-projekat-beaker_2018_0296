@@ -1,16 +1,17 @@
 <?php
 
+use App\Models\Vehicle;
 use Illuminate\Http\Request;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\VehicleTestController;
 use App\Http\Controllers\ReservationTestController;
 use App\Http\Controllers\UserReservationController;
 use App\Http\Controllers\VehicleReservationController;
-use App\Http\Resources\UserResource;
-use App\Models\Vehicle;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,3 +56,20 @@ Drugi nacin:
 Route::resource('user.reservation', UserReservationController::class)->only(['index']);
 Route::resource('vehicle.reservation', VehicleReservationController::class)->only(['index']);
 */
+
+Route::post('/register',[AuthController::class, 'register']);
+
+Route::post('/login',[AuthController::class, 'login']);
+
+Route::group(['middleware'=>['auth:sanctum']], function(){
+
+    Route:: get('/profile',function(Request $request){
+        return auth()->user();
+    });
+
+    Route::resource('reservations', ReservationController::class)->only(['update', 'store', 'destroy']);
+
+    Route::post('/logout', [AuthController::class, 'logout']);
+
+    Route::resource('reservations', ReservationController::class)->only(['index']);
+});
