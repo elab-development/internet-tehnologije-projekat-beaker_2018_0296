@@ -83,3 +83,30 @@ def ponuda(uplata: pt.abi.PaymentTransaction) -> pt.Expr:
             app.state.trazeni_iznos[pt.Txn.sender()] + uplata.get().amount()
         ),
     )
+
+
+@pt.Subroutine(pt.TealType.none)
+def plati(primalac: pt.Expr, iznos: pt.Expr) -> pt.Expr:
+    return pt.InnerTxnBuilder.Execute(
+        {
+            pt.TxnField.type_enum: pt.TxnType.Payment,
+            pt.TxnField.fee: pt.Int(0),
+            pt.TxnField.amount: iznos,
+            pt.TxnField.receiver: primalac,
+        }
+    )
+
+
+@app.external
+def vrati_neostvarene_ponude() -> pt.Expr:
+    return pt.Seq(
+        pt.If(pt.Txn.sender() == app.state.prethodnji_ponudjac.get())
+        .Then(
+            plati(
+                pt.Txn.sender(),
+                app.state.trazeni_iznos[pt.Txn.sender()].get()
+                - app.state.prethodna_ponuda.get(),
+            )
+        )
+        .Else(plati(pt.Txn.sender(), app.state.trazeni_iznos[pt.Txn.sender()].get()))
+    )

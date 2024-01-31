@@ -1,35 +1,27 @@
 #pragma version 8
 intcblock 0 1 4
-bytecblock 0x6b72616a5f61756b63696a65 0x70726574686f646e615f706f6e756461 0x746f6b656e 0x7472617a656e695f697a6e6f73 0x70726574686f646e6a695f706f6e75646a6163 0x746f6b656e5f6964
+bytecblock 0x6b72616a5f61756b63696a65 0x70726574686f646e615f706f6e756461 0x7472617a656e695f697a6e6f73 0x746f6b656e 0x70726574686f646e6a695f706f6e75646a6163 0x746f6b656e5f6964
 txn NumAppArgs
 intc_0 // 0
 ==
-bnz main_l8
+bnz main_l10
 txna ApplicationArgs 0
 pushbytes 0xfab457cd // "opt_into_NFT(asset)void"
 ==
-bnz main_l7
+bnz main_l9
 txna ApplicationArgs 0
 pushbytes 0x2f46c246 // "zapocni_aukciju(uint64,uint64,axfer)void"
 ==
-bnz main_l6
+bnz main_l8
 txna ApplicationArgs 0
 pushbytes 0x669d1add // "ponuda(pay)void"
 ==
-bnz main_l5
-err
-main_l5:
-txn OnCompletion
-intc_0 // NoOp
+bnz main_l7
+txna ApplicationArgs 0
+pushbytes 0xd38e8744 // "reclaim_bids()void"
 ==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub ponudacaster_7
-intc_1 // 1
-return
+bnz main_l6
+err
 main_l6:
 txn OnCompletion
 intc_0 // NoOp
@@ -39,7 +31,7 @@ intc_0 // 0
 !=
 &&
 assert
-callsub zapocniaukcijucaster_6
+callsub reclaimbidscaster_10
 intc_1 // 1
 return
 main_l7:
@@ -51,20 +43,44 @@ intc_0 // 0
 !=
 &&
 assert
-callsub optintoNFTcaster_5
+callsub ponudacaster_9
 intc_1 // 1
 return
 main_l8:
 txn OnCompletion
 intc_0 // NoOp
 ==
-bnz main_l12
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub zapocniaukcijucaster_8
+intc_1 // 1
+return
+main_l9:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub optintoNFTcaster_7
+intc_1 // 1
+return
+main_l10:
+txn OnCompletion
+intc_0 // NoOp
+==
+bnz main_l14
 txn OnCompletion
 intc_1 // OptIn
 ==
-bnz main_l11
+bnz main_l13
 err
-main_l11:
+main_l13:
 txn ApplicationID
 intc_0 // 0
 !=
@@ -72,7 +88,7 @@ assert
 callsub optin_3
 intc_1 // 1
 return
-main_l12:
+main_l14:
 txn ApplicationID
 intc_0 // 0
 ==
@@ -93,7 +109,7 @@ app_global_put
 bytec 4 // "prethodnji_ponudjac"
 pushbytes 0x // ""
 app_global_put
-bytec_2 // "token"
+bytec_3 // "token"
 intc_0 // 0
 app_global_put
 bytec 5 // "token_id"
@@ -109,12 +125,12 @@ global CreatorAddress
 ==
 // unauthorized
 assert
-bytec_2 // "token"
+bytec_3 // "token"
 app_global_get
 intc_0 // 0
 ==
 assert
-bytec_2 // "token"
+bytec_3 // "token"
 frame_dig -1
 txnas Assets
 app_global_put
@@ -159,7 +175,7 @@ gtxns AssetReceiver
 global CurrentApplicationAddress
 ==
 assert
-bytec_2 // "token"
+bytec_3 // "token"
 frame_dig -1
 gtxns AssetAmount
 app_global_put
@@ -173,7 +189,7 @@ retsub
 optin_3:
 proto 0 0
 txn Sender
-bytec_3 // "trazeni_iznos"
+bytec_2 // "trazeni_iznos"
 intc_0 // 0
 app_local_put
 retsub
@@ -211,9 +227,9 @@ frame_dig -1
 gtxns Amount
 app_global_put
 txn Sender
-bytec_3 // "trazeni_iznos"
+bytec_2 // "trazeni_iznos"
 txn Sender
-bytec_3 // "trazeni_iznos"
+bytec_2 // "trazeni_iznos"
 app_local_get
 frame_dig -1
 gtxns Amount
@@ -221,8 +237,49 @@ gtxns Amount
 app_local_put
 retsub
 
+// plati
+plati_5:
+proto 2 0
+itxn_begin
+intc_1 // pay
+itxn_field TypeEnum
+intc_0 // 0
+itxn_field Fee
+frame_dig -1
+itxn_field Amount
+frame_dig -2
+itxn_field Receiver
+itxn_submit
+retsub
+
+// reclaim_bids
+reclaimbids_6:
+proto 0 0
+txn Sender
+bytec 4 // "prethodnji_ponudjac"
+app_global_get
+==
+bnz reclaimbids_6_l2
+txn Sender
+txn Sender
+bytec_2 // "trazeni_iznos"
+app_local_get
+callsub plati_5
+b reclaimbids_6_l3
+reclaimbids_6_l2:
+txn Sender
+txn Sender
+bytec_2 // "trazeni_iznos"
+app_local_get
+bytec_1 // "prethodna_ponuda"
+app_global_get
+-
+callsub plati_5
+reclaimbids_6_l3:
+retsub
+
 // opt_into_NFT_caster
-optintoNFTcaster_5:
+optintoNFTcaster_7:
 proto 0 0
 intc_0 // 0
 txna ApplicationArgs 1
@@ -234,7 +291,7 @@ callsub optintoNFT_1
 retsub
 
 // zapocni_aukciju_caster
-zapocniaukcijucaster_6:
+zapocniaukcijucaster_8:
 proto 0 0
 intc_0 // 0
 dupn 2
@@ -260,7 +317,7 @@ callsub zapocniaukciju_2
 retsub
 
 // ponuda_caster
-ponudacaster_7:
+ponudacaster_9:
 proto 0 0
 intc_0 // 0
 txn GroupIndex
@@ -274,4 +331,10 @@ intc_1 // pay
 assert
 frame_dig 0
 callsub ponuda_4
+retsub
+
+// reclaim_bids_caster
+reclaimbidscaster_10:
+proto 0 0
+callsub reclaimbids_6
 retsub
