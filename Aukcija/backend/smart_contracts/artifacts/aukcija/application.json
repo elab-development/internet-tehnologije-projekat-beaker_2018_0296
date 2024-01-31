@@ -1,0 +1,141 @@
+{
+    "hints": {
+        "opt_into_NFT(asset)void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "zapocni_aukciju(uint64,uint64,axfer)void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "ponuda(pay)void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "reclaim_bids()void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDgKaW50Y2Jsb2NrIDAgMSA0CmJ5dGVjYmxvY2sgMHg2YjcyNjE2YTVmNjE3NTZiNjM2OTZhNjUgMHg3MDcyNjU3NDY4NmY2NDZlNjE1ZjcwNmY2ZTc1NjQ2MSAweDc0NzI2MTdhNjU2ZTY5NWY2OTdhNmU2ZjczIDB4NzQ2ZjZiNjU2ZSAweDcwNzI2NTc0Njg2ZjY0NmU2YTY5NWY3MDZmNmU3NTY0NmE2MTYzIDB4NzQ2ZjZiNjU2ZTVmNjk2NAp0eG4gTnVtQXBwQXJncwppbnRjXzAgLy8gMAo9PQpibnogbWFpbl9sMTAKdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMApwdXNoYnl0ZXMgMHhmYWI0NTdjZCAvLyAib3B0X2ludG9fTkZUKGFzc2V0KXZvaWQiCj09CmJueiBtYWluX2w5CnR4bmEgQXBwbGljYXRpb25BcmdzIDAKcHVzaGJ5dGVzIDB4MmY0NmMyNDYgLy8gInphcG9jbmlfYXVrY2lqdSh1aW50NjQsdWludDY0LGF4ZmVyKXZvaWQiCj09CmJueiBtYWluX2w4CnR4bmEgQXBwbGljYXRpb25BcmdzIDAKcHVzaGJ5dGVzIDB4NjY5ZDFhZGQgLy8gInBvbnVkYShwYXkpdm9pZCIKPT0KYm56IG1haW5fbDcKdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMApwdXNoYnl0ZXMgMHhkMzhlODc0NCAvLyAicmVjbGFpbV9iaWRzKCl2b2lkIgo9PQpibnogbWFpbl9sNgplcnIKbWFpbl9sNjoKdHhuIE9uQ29tcGxldGlvbgppbnRjXzAgLy8gTm9PcAo9PQp0eG4gQXBwbGljYXRpb25JRAppbnRjXzAgLy8gMAohPQomJgphc3NlcnQKY2FsbHN1YiByZWNsYWltYmlkc2Nhc3Rlcl8xMAppbnRjXzEgLy8gMQpyZXR1cm4KbWFpbl9sNzoKdHhuIE9uQ29tcGxldGlvbgppbnRjXzAgLy8gTm9PcAo9PQp0eG4gQXBwbGljYXRpb25JRAppbnRjXzAgLy8gMAohPQomJgphc3NlcnQKY2FsbHN1YiBwb251ZGFjYXN0ZXJfOQppbnRjXzEgLy8gMQpyZXR1cm4KbWFpbl9sODoKdHhuIE9uQ29tcGxldGlvbgppbnRjXzAgLy8gTm9PcAo9PQp0eG4gQXBwbGljYXRpb25JRAppbnRjXzAgLy8gMAohPQomJgphc3NlcnQKY2FsbHN1YiB6YXBvY25pYXVrY2lqdWNhc3Rlcl84CmludGNfMSAvLyAxCnJldHVybgptYWluX2w5Ogp0eG4gT25Db21wbGV0aW9uCmludGNfMCAvLyBOb09wCj09CnR4biBBcHBsaWNhdGlvbklECmludGNfMCAvLyAwCiE9CiYmCmFzc2VydApjYWxsc3ViIG9wdGludG9ORlRjYXN0ZXJfNwppbnRjXzEgLy8gMQpyZXR1cm4KbWFpbl9sMTA6CnR4biBPbkNvbXBsZXRpb24KaW50Y18wIC8vIE5vT3AKPT0KYm56IG1haW5fbDE0CnR4biBPbkNvbXBsZXRpb24KaW50Y18xIC8vIE9wdEluCj09CmJueiBtYWluX2wxMwplcnIKbWFpbl9sMTM6CnR4biBBcHBsaWNhdGlvbklECmludGNfMCAvLyAwCiE9CmFzc2VydApjYWxsc3ViIG9wdGluXzMKaW50Y18xIC8vIDEKcmV0dXJuCm1haW5fbDE0Ogp0eG4gQXBwbGljYXRpb25JRAppbnRjXzAgLy8gMAo9PQphc3NlcnQKY2FsbHN1YiBjcmVhdGVfMAppbnRjXzEgLy8gMQpyZXR1cm4KCi8vIGNyZWF0ZQpjcmVhdGVfMDoKcHJvdG8gMCAwCmJ5dGVjXzAgLy8gImtyYWpfYXVrY2lqZSIKaW50Y18wIC8vIDAKYXBwX2dsb2JhbF9wdXQKYnl0ZWNfMSAvLyAicHJldGhvZG5hX3BvbnVkYSIKaW50Y18wIC8vIDAKYXBwX2dsb2JhbF9wdXQKYnl0ZWMgNCAvLyAicHJldGhvZG5qaV9wb251ZGphYyIKcHVzaGJ5dGVzIDB4IC8vICIiCmFwcF9nbG9iYWxfcHV0CmJ5dGVjXzMgLy8gInRva2VuIgppbnRjXzAgLy8gMAphcHBfZ2xvYmFsX3B1dApieXRlYyA1IC8vICJ0b2tlbl9pZCIKaW50Y18wIC8vIDAKYXBwX2dsb2JhbF9wdXQKcmV0c3ViCgovLyBvcHRfaW50b19ORlQKb3B0aW50b05GVF8xOgpwcm90byAxIDAKdHhuIFNlbmRlcgpnbG9iYWwgQ3JlYXRvckFkZHJlc3MKPT0KLy8gdW5hdXRob3JpemVkCmFzc2VydApieXRlY18zIC8vICJ0b2tlbiIKYXBwX2dsb2JhbF9nZXQKaW50Y18wIC8vIDAKPT0KYXNzZXJ0CmJ5dGVjXzMgLy8gInRva2VuIgpmcmFtZV9kaWcgLTEKdHhuYXMgQXNzZXRzCmFwcF9nbG9iYWxfcHV0Cml0eG5fYmVnaW4KaW50Y18yIC8vIGF4ZmVyCml0eG5fZmllbGQgVHlwZUVudW0KZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKaXR4bl9maWVsZCBBc3NldFJlY2VpdmVyCmZyYW1lX2RpZyAtMQp0eG5hcyBBc3NldHMKaXR4bl9maWVsZCBYZmVyQXNzZXQKaW50Y18wIC8vIDAKaXR4bl9maWVsZCBBc3NldEFtb3VudAppbnRjXzAgLy8gMAppdHhuX2ZpZWxkIEZlZQppdHhuX3N1Ym1pdApyZXRzdWIKCi8vIHphcG9jbmlfYXVrY2lqdQp6YXBvY25pYXVrY2lqdV8yOgpwcm90byAzIDAKdHhuIFNlbmRlcgpnbG9iYWwgQ3JlYXRvckFkZHJlc3MKPT0KLy8gdW5hdXRob3JpemVkCmFzc2VydApieXRlY18wIC8vICJrcmFqX2F1a2NpamUiCmFwcF9nbG9iYWxfZ2V0CmludGNfMCAvLyAwCj09CmFzc2VydApieXRlY18xIC8vICJwcmV0aG9kbmFfcG9udWRhIgpmcmFtZV9kaWcgLTMKYXBwX2dsb2JhbF9wdXQKYnl0ZWNfMCAvLyAia3Jhal9hdWtjaWplIgpmcmFtZV9kaWcgLTIKZ2xvYmFsIExhdGVzdFRpbWVzdGFtcAorCmFwcF9nbG9iYWxfcHV0CmZyYW1lX2RpZyAtMQpndHhucyBBc3NldFJlY2VpdmVyCmdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCj09CmFzc2VydApieXRlY18zIC8vICJ0b2tlbiIKZnJhbWVfZGlnIC0xCmd0eG5zIEFzc2V0QW1vdW50CmFwcF9nbG9iYWxfcHV0CmJ5dGVjIDUgLy8gInRva2VuX2lkIgpmcmFtZV9kaWcgLTEKZ3R4bnMgWGZlckFzc2V0CmFwcF9nbG9iYWxfcHV0CnJldHN1YgoKLy8gb3B0X2luCm9wdGluXzM6CnByb3RvIDAgMAp0eG4gU2VuZGVyCmJ5dGVjXzIgLy8gInRyYXplbmlfaXpub3MiCmludGNfMCAvLyAwCmFwcF9sb2NhbF9wdXQKcmV0c3ViCgovLyBwb251ZGEKcG9udWRhXzQ6CnByb3RvIDEgMApieXRlY18wIC8vICJrcmFqX2F1a2NpamUiCmFwcF9nbG9iYWxfZ2V0Cmdsb2JhbCBMYXRlc3RUaW1lc3RhbXAKPgphc3NlcnQKYnl0ZWNfMCAvLyAia3Jhal9hdWtjaWplIgphcHBfZ2xvYmFsX2dldAppbnRjXzAgLy8gMAohPQphc3NlcnQKZnJhbWVfZGlnIC0xCmd0eG5zIEFtb3VudApieXRlY18xIC8vICJwcmV0aG9kbmFfcG9udWRhIgphcHBfZ2xvYmFsX2dldAo+CmFzc2VydApmcmFtZV9kaWcgLTEKZ3R4bnMgUmVjZWl2ZXIKZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKPT0KYXNzZXJ0CmJ5dGVjIDQgLy8gInByZXRob2RuamlfcG9udWRqYWMiCmZyYW1lX2RpZyAtMQpndHhucyBTZW5kZXIKYXBwX2dsb2JhbF9wdXQKYnl0ZWNfMSAvLyAicHJldGhvZG5hX3BvbnVkYSIKZnJhbWVfZGlnIC0xCmd0eG5zIEFtb3VudAphcHBfZ2xvYmFsX3B1dAp0eG4gU2VuZGVyCmJ5dGVjXzIgLy8gInRyYXplbmlfaXpub3MiCnR4biBTZW5kZXIKYnl0ZWNfMiAvLyAidHJhemVuaV9pem5vcyIKYXBwX2xvY2FsX2dldApmcmFtZV9kaWcgLTEKZ3R4bnMgQW1vdW50CisKYXBwX2xvY2FsX3B1dApyZXRzdWIKCi8vIHBsYXRpCnBsYXRpXzU6CnByb3RvIDIgMAppdHhuX2JlZ2luCmludGNfMSAvLyBwYXkKaXR4bl9maWVsZCBUeXBlRW51bQppbnRjXzAgLy8gMAppdHhuX2ZpZWxkIEZlZQpmcmFtZV9kaWcgLTEKaXR4bl9maWVsZCBBbW91bnQKZnJhbWVfZGlnIC0yCml0eG5fZmllbGQgUmVjZWl2ZXIKaXR4bl9zdWJtaXQKcmV0c3ViCgovLyByZWNsYWltX2JpZHMKcmVjbGFpbWJpZHNfNjoKcHJvdG8gMCAwCnR4biBTZW5kZXIKYnl0ZWMgNCAvLyAicHJldGhvZG5qaV9wb251ZGphYyIKYXBwX2dsb2JhbF9nZXQKPT0KYm56IHJlY2xhaW1iaWRzXzZfbDIKdHhuIFNlbmRlcgp0eG4gU2VuZGVyCmJ5dGVjXzIgLy8gInRyYXplbmlfaXpub3MiCmFwcF9sb2NhbF9nZXQKY2FsbHN1YiBwbGF0aV81CmIgcmVjbGFpbWJpZHNfNl9sMwpyZWNsYWltYmlkc182X2wyOgp0eG4gU2VuZGVyCnR4biBTZW5kZXIKYnl0ZWNfMiAvLyAidHJhemVuaV9pem5vcyIKYXBwX2xvY2FsX2dldApieXRlY18xIC8vICJwcmV0aG9kbmFfcG9udWRhIgphcHBfZ2xvYmFsX2dldAotCmNhbGxzdWIgcGxhdGlfNQpyZWNsYWltYmlkc182X2wzOgpyZXRzdWIKCi8vIG9wdF9pbnRvX05GVF9jYXN0ZXIKb3B0aW50b05GVGNhc3Rlcl83Ogpwcm90byAwIDAKaW50Y18wIC8vIDAKdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQppbnRjXzAgLy8gMApnZXRieXRlCmZyYW1lX2J1cnkgMApmcmFtZV9kaWcgMApjYWxsc3ViIG9wdGludG9ORlRfMQpyZXRzdWIKCi8vIHphcG9jbmlfYXVrY2lqdV9jYXN0ZXIKemFwb2NuaWF1a2NpanVjYXN0ZXJfODoKcHJvdG8gMCAwCmludGNfMCAvLyAwCmR1cG4gMgp0eG5hIEFwcGxpY2F0aW9uQXJncyAxCmJ0b2kKZnJhbWVfYnVyeSAwCnR4bmEgQXBwbGljYXRpb25BcmdzIDIKYnRvaQpmcmFtZV9idXJ5IDEKdHhuIEdyb3VwSW5kZXgKaW50Y18xIC8vIDEKLQpmcmFtZV9idXJ5IDIKZnJhbWVfZGlnIDIKZ3R4bnMgVHlwZUVudW0KaW50Y18yIC8vIGF4ZmVyCj09CmFzc2VydApmcmFtZV9kaWcgMApmcmFtZV9kaWcgMQpmcmFtZV9kaWcgMgpjYWxsc3ViIHphcG9jbmlhdWtjaWp1XzIKcmV0c3ViCgovLyBwb251ZGFfY2FzdGVyCnBvbnVkYWNhc3Rlcl85Ogpwcm90byAwIDAKaW50Y18wIC8vIDAKdHhuIEdyb3VwSW5kZXgKaW50Y18xIC8vIDEKLQpmcmFtZV9idXJ5IDAKZnJhbWVfZGlnIDAKZ3R4bnMgVHlwZUVudW0KaW50Y18xIC8vIHBheQo9PQphc3NlcnQKZnJhbWVfZGlnIDAKY2FsbHN1YiBwb251ZGFfNApyZXRzdWIKCi8vIHJlY2xhaW1fYmlkc19jYXN0ZXIKcmVjbGFpbWJpZHNjYXN0ZXJfMTA6CnByb3RvIDAgMApjYWxsc3ViIHJlY2xhaW1iaWRzXzYKcmV0c3Vi",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDgKcHVzaGludCAwIC8vIDAKcmV0dXJu"
+    },
+    "state": {
+        "global": {
+            "num_byte_slices": 1,
+            "num_uints": 4
+        },
+        "local": {
+            "num_byte_slices": 0,
+            "num_uints": 1
+        }
+    },
+    "schema": {
+        "global": {
+            "declared": {
+                "kraj_aukcije": {
+                    "type": "uint64",
+                    "key": "kraj_aukcije",
+                    "descr": ""
+                },
+                "prethodna_ponuda": {
+                    "type": "uint64",
+                    "key": "prethodna_ponuda",
+                    "descr": ""
+                },
+                "prethodnji_ponudjac": {
+                    "type": "bytes",
+                    "key": "prethodnji_ponudjac",
+                    "descr": ""
+                },
+                "token": {
+                    "type": "uint64",
+                    "key": "token",
+                    "descr": ""
+                },
+                "token_id": {
+                    "type": "uint64",
+                    "key": "token_id",
+                    "descr": ""
+                }
+            },
+            "reserved": {}
+        },
+        "local": {
+            "declared": {
+                "trazeni_iznos": {
+                    "type": "uint64",
+                    "key": "trazeni_iznos",
+                    "descr": ""
+                }
+            },
+            "reserved": {}
+        }
+    },
+    "contract": {
+        "name": "aukcija",
+        "methods": [
+            {
+                "name": "opt_into_NFT",
+                "args": [
+                    {
+                        "type": "asset",
+                        "name": "NFT"
+                    }
+                ],
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "zapocni_aukciju",
+                "args": [
+                    {
+                        "type": "uint64",
+                        "name": "pocetna_cena"
+                    },
+                    {
+                        "type": "uint64",
+                        "name": "duzina"
+                    },
+                    {
+                        "type": "axfer",
+                        "name": "NFTatt"
+                    }
+                ],
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "ponuda",
+                "args": [
+                    {
+                        "type": "pay",
+                        "name": "uplata"
+                    }
+                ],
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "reclaim_bids",
+                "args": [],
+                "returns": {
+                    "type": "void"
+                }
+            }
+        ],
+        "networks": {}
+    },
+    "bare_call_config": {
+        "no_op": "CREATE",
+        "opt_in": "CALL"
+    }
+}

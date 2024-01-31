@@ -1,0 +1,57 @@
+{
+    "name": "aukcija",
+    "methods": [
+        {
+            "name": "opt_into_NFT",
+            "args": [
+                {
+                    "type": "asset",
+                    "name": "NFT"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            }
+        },
+        {
+            "name": "zapocni_aukciju",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "pocetna_cena"
+                },
+                {
+                    "type": "uint64",
+                    "name": "duzina"
+                },
+                {
+                    "type": "axfer",
+                    "name": "NFTatt"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            }
+        },
+        {
+            "name": "ponuda",
+            "args": [
+                {
+                    "type": "pay",
+                    "name": "uplata"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            }
+        },
+        {
+            "name": "reclaim_bids",
+            "args": [],
+            "returns": {
+                "type": "void"
+            }
+        }
+    ],
+    "networks": {}
+}
