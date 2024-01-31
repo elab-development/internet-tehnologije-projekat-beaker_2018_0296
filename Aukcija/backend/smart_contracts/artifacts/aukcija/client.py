@@ -21,9 +21,25 @@ from algosdk.atomic_transaction_composer import (
 )
 
 _APP_SPEC_JSON = r"""{
-    "hints": {},
+    "hints": {
+        "opt_into_NFT(asset)void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "zapocni_aukciju(uint64,uint64,axfer)void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "ponuda(pay)void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        }
+    },
     "source": {
-        "approval": "I3ByYWdtYSB2ZXJzaW9uIDgKaW50Y2Jsb2NrIDAKdHhuIE51bUFwcEFyZ3MKaW50Y18wIC8vIDAKPT0KYm56IG1haW5fbDIKZXJyCm1haW5fbDI6CnR4biBPbkNvbXBsZXRpb24KaW50Y18wIC8vIE5vT3AKPT0KYm56IG1haW5fbDQKZXJyCm1haW5fbDQ6CnR4biBBcHBsaWNhdGlvbklECmludGNfMCAvLyAwCj09CmFzc2VydApjYWxsc3ViIGNyZWF0ZV8wCnB1c2hpbnQgMSAvLyAxCnJldHVybgoKLy8gY3JlYXRlCmNyZWF0ZV8wOgpwcm90byAwIDAKcHVzaGJ5dGVzIDB4NmI3MjYxNmE1ZjYxNzU2YjYzNjk2YTY1IC8vICJrcmFqX2F1a2NpamUiCmludGNfMCAvLyAwCmFwcF9nbG9iYWxfcHV0CnB1c2hieXRlcyAweDcwNzI2NTc0Njg2ZjY0NmU2MTVmNzA2ZjZlNzU2NDYxIC8vICJwcmV0aG9kbmFfcG9udWRhIgppbnRjXzAgLy8gMAphcHBfZ2xvYmFsX3B1dApwdXNoYnl0ZXMgMHg3MDcyNjU3NDY4NmY2NDZlNmE2OTVmNzA2ZjZlNzU2NDZhNjE2MyAvLyAicHJldGhvZG5qaV9wb251ZGphYyIKcHVzaGJ5dGVzIDB4IC8vICIiCmFwcF9nbG9iYWxfcHV0CnB1c2hieXRlcyAweDc0NmY2YjY1NmUgLy8gInRva2VuIgppbnRjXzAgLy8gMAphcHBfZ2xvYmFsX3B1dApwdXNoYnl0ZXMgMHg3NDZmNmI2NTZlNWY2OTY0IC8vICJ0b2tlbl9pZCIKaW50Y18wIC8vIDAKYXBwX2dsb2JhbF9wdXQKcmV0c3Vi",
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDgKaW50Y2Jsb2NrIDAgMSA0CmJ5dGVjYmxvY2sgMHg2YjcyNjE2YTVmNjE3NTZiNjM2OTZhNjUgMHg3MDcyNjU3NDY4NmY2NDZlNjE1ZjcwNmY2ZTc1NjQ2MSAweDc0NmY2YjY1NmUgMHg3NDcyNjE3YTY1NmU2OTVmNjk3YTZlNmY3MyAweDcwNzI2NTc0Njg2ZjY0NmU2YTY5NWY3MDZmNmU3NTY0NmE2MTYzIDB4NzQ2ZjZiNjU2ZTVmNjk2NAp0eG4gTnVtQXBwQXJncwppbnRjXzAgLy8gMAo9PQpibnogbWFpbl9sOAp0eG5hIEFwcGxpY2F0aW9uQXJncyAwCnB1c2hieXRlcyAweGZhYjQ1N2NkIC8vICJvcHRfaW50b19ORlQoYXNzZXQpdm9pZCIKPT0KYm56IG1haW5fbDcKdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMApwdXNoYnl0ZXMgMHgyZjQ2YzI0NiAvLyAiemFwb2NuaV9hdWtjaWp1KHVpbnQ2NCx1aW50NjQsYXhmZXIpdm9pZCIKPT0KYm56IG1haW5fbDYKdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMApwdXNoYnl0ZXMgMHg2NjlkMWFkZCAvLyAicG9udWRhKHBheSl2b2lkIgo9PQpibnogbWFpbl9sNQplcnIKbWFpbl9sNToKdHhuIE9uQ29tcGxldGlvbgppbnRjXzAgLy8gTm9PcAo9PQp0eG4gQXBwbGljYXRpb25JRAppbnRjXzAgLy8gMAohPQomJgphc3NlcnQKY2FsbHN1YiBwb251ZGFjYXN0ZXJfNwppbnRjXzEgLy8gMQpyZXR1cm4KbWFpbl9sNjoKdHhuIE9uQ29tcGxldGlvbgppbnRjXzAgLy8gTm9PcAo9PQp0eG4gQXBwbGljYXRpb25JRAppbnRjXzAgLy8gMAohPQomJgphc3NlcnQKY2FsbHN1YiB6YXBvY25pYXVrY2lqdWNhc3Rlcl82CmludGNfMSAvLyAxCnJldHVybgptYWluX2w3Ogp0eG4gT25Db21wbGV0aW9uCmludGNfMCAvLyBOb09wCj09CnR4biBBcHBsaWNhdGlvbklECmludGNfMCAvLyAwCiE9CiYmCmFzc2VydApjYWxsc3ViIG9wdGludG9ORlRjYXN0ZXJfNQppbnRjXzEgLy8gMQpyZXR1cm4KbWFpbl9sODoKdHhuIE9uQ29tcGxldGlvbgppbnRjXzAgLy8gTm9PcAo9PQpibnogbWFpbl9sMTIKdHhuIE9uQ29tcGxldGlvbgppbnRjXzEgLy8gT3B0SW4KPT0KYm56IG1haW5fbDExCmVycgptYWluX2wxMToKdHhuIEFwcGxpY2F0aW9uSUQKaW50Y18wIC8vIDAKIT0KYXNzZXJ0CmNhbGxzdWIgb3B0aW5fMwppbnRjXzEgLy8gMQpyZXR1cm4KbWFpbl9sMTI6CnR4biBBcHBsaWNhdGlvbklECmludGNfMCAvLyAwCj09CmFzc2VydApjYWxsc3ViIGNyZWF0ZV8wCmludGNfMSAvLyAxCnJldHVybgoKLy8gY3JlYXRlCmNyZWF0ZV8wOgpwcm90byAwIDAKYnl0ZWNfMCAvLyAia3Jhal9hdWtjaWplIgppbnRjXzAgLy8gMAphcHBfZ2xvYmFsX3B1dApieXRlY18xIC8vICJwcmV0aG9kbmFfcG9udWRhIgppbnRjXzAgLy8gMAphcHBfZ2xvYmFsX3B1dApieXRlYyA0IC8vICJwcmV0aG9kbmppX3BvbnVkamFjIgpwdXNoYnl0ZXMgMHggLy8gIiIKYXBwX2dsb2JhbF9wdXQKYnl0ZWNfMiAvLyAidG9rZW4iCmludGNfMCAvLyAwCmFwcF9nbG9iYWxfcHV0CmJ5dGVjIDUgLy8gInRva2VuX2lkIgppbnRjXzAgLy8gMAphcHBfZ2xvYmFsX3B1dApyZXRzdWIKCi8vIG9wdF9pbnRvX05GVApvcHRpbnRvTkZUXzE6CnByb3RvIDEgMAp0eG4gU2VuZGVyCmdsb2JhbCBDcmVhdG9yQWRkcmVzcwo9PQovLyB1bmF1dGhvcml6ZWQKYXNzZXJ0CmJ5dGVjXzIgLy8gInRva2VuIgphcHBfZ2xvYmFsX2dldAppbnRjXzAgLy8gMAo9PQphc3NlcnQKYnl0ZWNfMiAvLyAidG9rZW4iCmZyYW1lX2RpZyAtMQp0eG5hcyBBc3NldHMKYXBwX2dsb2JhbF9wdXQKaXR4bl9iZWdpbgppbnRjXzIgLy8gYXhmZXIKaXR4bl9maWVsZCBUeXBlRW51bQpnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwppdHhuX2ZpZWxkIEFzc2V0UmVjZWl2ZXIKZnJhbWVfZGlnIC0xCnR4bmFzIEFzc2V0cwppdHhuX2ZpZWxkIFhmZXJBc3NldAppbnRjXzAgLy8gMAppdHhuX2ZpZWxkIEFzc2V0QW1vdW50CmludGNfMCAvLyAwCml0eG5fZmllbGQgRmVlCml0eG5fc3VibWl0CnJldHN1YgoKLy8gemFwb2NuaV9hdWtjaWp1CnphcG9jbmlhdWtjaWp1XzI6CnByb3RvIDMgMAp0eG4gU2VuZGVyCmdsb2JhbCBDcmVhdG9yQWRkcmVzcwo9PQovLyB1bmF1dGhvcml6ZWQKYXNzZXJ0CmJ5dGVjXzAgLy8gImtyYWpfYXVrY2lqZSIKYXBwX2dsb2JhbF9nZXQKaW50Y18wIC8vIDAKPT0KYXNzZXJ0CmJ5dGVjXzEgLy8gInByZXRob2RuYV9wb251ZGEiCmZyYW1lX2RpZyAtMwphcHBfZ2xvYmFsX3B1dApieXRlY18wIC8vICJrcmFqX2F1a2NpamUiCmZyYW1lX2RpZyAtMgpnbG9iYWwgTGF0ZXN0VGltZXN0YW1wCisKYXBwX2dsb2JhbF9wdXQKZnJhbWVfZGlnIC0xCmd0eG5zIEFzc2V0UmVjZWl2ZXIKZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKPT0KYXNzZXJ0CmJ5dGVjXzIgLy8gInRva2VuIgpmcmFtZV9kaWcgLTEKZ3R4bnMgQXNzZXRBbW91bnQKYXBwX2dsb2JhbF9wdXQKYnl0ZWMgNSAvLyAidG9rZW5faWQiCmZyYW1lX2RpZyAtMQpndHhucyBYZmVyQXNzZXQKYXBwX2dsb2JhbF9wdXQKcmV0c3ViCgovLyBvcHRfaW4Kb3B0aW5fMzoKcHJvdG8gMCAwCnR4biBTZW5kZXIKYnl0ZWNfMyAvLyAidHJhemVuaV9pem5vcyIKaW50Y18wIC8vIDAKYXBwX2xvY2FsX3B1dApyZXRzdWIKCi8vIHBvbnVkYQpwb251ZGFfNDoKcHJvdG8gMSAwCmJ5dGVjXzAgLy8gImtyYWpfYXVrY2lqZSIKYXBwX2dsb2JhbF9nZXQKZ2xvYmFsIExhdGVzdFRpbWVzdGFtcAo+CmFzc2VydApieXRlY18wIC8vICJrcmFqX2F1a2NpamUiCmFwcF9nbG9iYWxfZ2V0CmludGNfMCAvLyAwCiE9CmFzc2VydApmcmFtZV9kaWcgLTEKZ3R4bnMgQW1vdW50CmJ5dGVjXzEgLy8gInByZXRob2RuYV9wb251ZGEiCmFwcF9nbG9iYWxfZ2V0Cj4KYXNzZXJ0CmZyYW1lX2RpZyAtMQpndHhucyBSZWNlaXZlcgpnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwo9PQphc3NlcnQKYnl0ZWMgNCAvLyAicHJldGhvZG5qaV9wb251ZGphYyIKZnJhbWVfZGlnIC0xCmd0eG5zIFNlbmRlcgphcHBfZ2xvYmFsX3B1dApieXRlY18xIC8vICJwcmV0aG9kbmFfcG9udWRhIgpmcmFtZV9kaWcgLTEKZ3R4bnMgQW1vdW50CmFwcF9nbG9iYWxfcHV0CnR4biBTZW5kZXIKYnl0ZWNfMyAvLyAidHJhemVuaV9pem5vcyIKdHhuIFNlbmRlcgpieXRlY18zIC8vICJ0cmF6ZW5pX2l6bm9zIgphcHBfbG9jYWxfZ2V0CmZyYW1lX2RpZyAtMQpndHhucyBBbW91bnQKKwphcHBfbG9jYWxfcHV0CnJldHN1YgoKLy8gb3B0X2ludG9fTkZUX2Nhc3RlcgpvcHRpbnRvTkZUY2FzdGVyXzU6CnByb3RvIDAgMAppbnRjXzAgLy8gMAp0eG5hIEFwcGxpY2F0aW9uQXJncyAxCmludGNfMCAvLyAwCmdldGJ5dGUKZnJhbWVfYnVyeSAwCmZyYW1lX2RpZyAwCmNhbGxzdWIgb3B0aW50b05GVF8xCnJldHN1YgoKLy8gemFwb2NuaV9hdWtjaWp1X2Nhc3Rlcgp6YXBvY25pYXVrY2lqdWNhc3Rlcl82Ogpwcm90byAwIDAKaW50Y18wIC8vIDAKZHVwbiAyCnR4bmEgQXBwbGljYXRpb25BcmdzIDEKYnRvaQpmcmFtZV9idXJ5IDAKdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgpidG9pCmZyYW1lX2J1cnkgMQp0eG4gR3JvdXBJbmRleAppbnRjXzEgLy8gMQotCmZyYW1lX2J1cnkgMgpmcmFtZV9kaWcgMgpndHhucyBUeXBlRW51bQppbnRjXzIgLy8gYXhmZXIKPT0KYXNzZXJ0CmZyYW1lX2RpZyAwCmZyYW1lX2RpZyAxCmZyYW1lX2RpZyAyCmNhbGxzdWIgemFwb2NuaWF1a2NpanVfMgpyZXRzdWIKCi8vIHBvbnVkYV9jYXN0ZXIKcG9udWRhY2FzdGVyXzc6CnByb3RvIDAgMAppbnRjXzAgLy8gMAp0eG4gR3JvdXBJbmRleAppbnRjXzEgLy8gMQotCmZyYW1lX2J1cnkgMApmcmFtZV9kaWcgMApndHhucyBUeXBlRW51bQppbnRjXzEgLy8gcGF5Cj09CmFzc2VydApmcmFtZV9kaWcgMApjYWxsc3ViIHBvbnVkYV80CnJldHN1Yg==",
         "clear": "I3ByYWdtYSB2ZXJzaW9uIDgKcHVzaGludCAwIC8vIDAKcmV0dXJu"
     },
     "state": {
@@ -80,14 +96,68 @@ _APP_SPEC_JSON = r"""{
     },
     "contract": {
         "name": "aukcija",
-        "methods": [],
+        "methods": [
+            {
+                "name": "opt_into_NFT",
+                "args": [
+                    {
+                        "type": "asset",
+                        "name": "NFT"
+                    }
+                ],
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "zapocni_aukciju",
+                "args": [
+                    {
+                        "type": "uint64",
+                        "name": "pocetna_cena"
+                    },
+                    {
+                        "type": "uint64",
+                        "name": "duzina"
+                    },
+                    {
+                        "type": "axfer",
+                        "name": "NFTatt"
+                    }
+                ],
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "ponuda",
+                "args": [
+                    {
+                        "type": "pay",
+                        "name": "uplata"
+                    }
+                ],
+                "returns": {
+                    "type": "void"
+                }
+            }
+        ],
         "networks": {}
     },
     "bare_call_config": {
-        "no_op": "CREATE"
+        "no_op": "CREATE",
+        "opt_in": "CALL"
     }
 }"""
 APP_SPEC = algokit_utils.ApplicationSpecification.from_json(_APP_SPEC_JSON)
+_TReturn = typing.TypeVar("_TReturn")
+
+
+class _ArgsBase(ABC, typing.Generic[_TReturn]):
+    @staticmethod
+    @abstractmethod
+    def method() -> str:
+        ...
 
 
 _TArgs = typing.TypeVar("_TArgs", bound=_ArgsBase[typing.Any])
@@ -152,6 +222,35 @@ def _convert_deploy_args(
     return deploy_args_dict
 
 
+@dataclasses.dataclass(kw_only=True)
+class OptIntoNftArgs(_ArgsBase[None]):
+    NFT: int
+
+    @staticmethod
+    def method() -> str:
+        return "opt_into_NFT(asset)void"
+
+
+@dataclasses.dataclass(kw_only=True)
+class ZapocniAukcijuArgs(_ArgsBase[None]):
+    pocetna_cena: int
+    duzina: int
+    NFTatt: TransactionWithSigner
+
+    @staticmethod
+    def method() -> str:
+        return "zapocni_aukciju(uint64,uint64,axfer)void"
+
+
+@dataclasses.dataclass(kw_only=True)
+class PonudaArgs(_ArgsBase[None]):
+    uplata: TransactionWithSigner
+
+    @staticmethod
+    def method() -> str:
+        return "ponuda(pay)void"
+
+
 class ByteReader:
     def __init__(self, data: bytes):
         self._data = data
@@ -203,6 +302,81 @@ class Composer:
     def execute(self) -> AtomicTransactionResponse:
         return self.app_client.execute_atc(self.atc)
 
+    def opt_into_nft(
+        self,
+        *,
+        NFT: int,
+        transaction_parameters: algokit_utils.TransactionParameters | None = None,
+    ) -> "Composer":
+        """Adds a call to `opt_into_NFT(asset)void` ABI method
+        
+        :param int NFT: The `NFT` ABI parameter
+        :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
+        :returns Composer: This Composer instance"""
+
+        args = OptIntoNftArgs(
+            NFT=NFT,
+        )
+        self.app_client.compose_call(
+            self.atc,
+            call_abi_method=args.method(),
+            transaction_parameters=_convert_call_transaction_parameters(transaction_parameters),
+            **_as_dict(args, convert_all=True),
+        )
+        return self
+
+    def zapocni_aukciju(
+        self,
+        *,
+        pocetna_cena: int,
+        duzina: int,
+        NFTatt: TransactionWithSigner,
+        transaction_parameters: algokit_utils.TransactionParameters | None = None,
+    ) -> "Composer":
+        """Adds a call to `zapocni_aukciju(uint64,uint64,axfer)void` ABI method
+        
+        :param int pocetna_cena: The `pocetna_cena` ABI parameter
+        :param int duzina: The `duzina` ABI parameter
+        :param TransactionWithSigner NFTatt: The `NFTatt` ABI parameter
+        :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
+        :returns Composer: This Composer instance"""
+
+        args = ZapocniAukcijuArgs(
+            pocetna_cena=pocetna_cena,
+            duzina=duzina,
+            NFTatt=NFTatt,
+        )
+        self.app_client.compose_call(
+            self.atc,
+            call_abi_method=args.method(),
+            transaction_parameters=_convert_call_transaction_parameters(transaction_parameters),
+            **_as_dict(args, convert_all=True),
+        )
+        return self
+
+    def ponuda(
+        self,
+        *,
+        uplata: TransactionWithSigner,
+        transaction_parameters: algokit_utils.TransactionParameters | None = None,
+    ) -> "Composer":
+        """Adds a call to `ponuda(pay)void` ABI method
+        
+        :param TransactionWithSigner uplata: The `uplata` ABI parameter
+        :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
+        :returns Composer: This Composer instance"""
+
+        args = PonudaArgs(
+            uplata=uplata,
+        )
+        self.app_client.compose_call(
+            self.atc,
+            call_abi_method=args.method(),
+            transaction_parameters=_convert_call_transaction_parameters(transaction_parameters),
+            **_as_dict(args, convert_all=True),
+        )
+        return self
+
     def create_bare(
         self,
         *,
@@ -219,6 +393,23 @@ class Composer:
             self.atc,
             call_abi_method=False,
             transaction_parameters=_convert_create_transaction_parameters(transaction_parameters, on_complete),
+        )
+        return self
+
+    def opt_in_bare(
+        self,
+        *,
+        transaction_parameters: algokit_utils.TransactionParameters | None = None,
+    ) -> "Composer":
+        """Adds a calls to the opt_in bare method
+        
+        :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
+        :returns Composer: This Composer instance"""
+
+        self.app_client.compose_opt_in(
+            self.atc,
+            call_abi_method=False,
+            transaction_parameters=_convert_transaction_parameters(transaction_parameters),
         )
         return self
 
@@ -374,6 +565,78 @@ class AukcijaClient:
         state = typing.cast(dict[bytes, bytes | int], self.app_client.get_local_state(account, raw=True))
         return LocalState(state)
 
+    def opt_into_nft(
+        self,
+        *,
+        NFT: int,
+        transaction_parameters: algokit_utils.TransactionParameters | None = None,
+    ) -> algokit_utils.ABITransactionResponse[None]:
+        """Calls `opt_into_NFT(asset)void` ABI method
+        
+        :param int NFT: The `NFT` ABI parameter
+        :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
+        :returns algokit_utils.ABITransactionResponse[None]: The result of the transaction"""
+
+        args = OptIntoNftArgs(
+            NFT=NFT,
+        )
+        result = self.app_client.call(
+            call_abi_method=args.method(),
+            transaction_parameters=_convert_call_transaction_parameters(transaction_parameters),
+            **_as_dict(args, convert_all=True),
+        )
+        return result
+
+    def zapocni_aukciju(
+        self,
+        *,
+        pocetna_cena: int,
+        duzina: int,
+        NFTatt: TransactionWithSigner,
+        transaction_parameters: algokit_utils.TransactionParameters | None = None,
+    ) -> algokit_utils.ABITransactionResponse[None]:
+        """Calls `zapocni_aukciju(uint64,uint64,axfer)void` ABI method
+        
+        :param int pocetna_cena: The `pocetna_cena` ABI parameter
+        :param int duzina: The `duzina` ABI parameter
+        :param TransactionWithSigner NFTatt: The `NFTatt` ABI parameter
+        :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
+        :returns algokit_utils.ABITransactionResponse[None]: The result of the transaction"""
+
+        args = ZapocniAukcijuArgs(
+            pocetna_cena=pocetna_cena,
+            duzina=duzina,
+            NFTatt=NFTatt,
+        )
+        result = self.app_client.call(
+            call_abi_method=args.method(),
+            transaction_parameters=_convert_call_transaction_parameters(transaction_parameters),
+            **_as_dict(args, convert_all=True),
+        )
+        return result
+
+    def ponuda(
+        self,
+        *,
+        uplata: TransactionWithSigner,
+        transaction_parameters: algokit_utils.TransactionParameters | None = None,
+    ) -> algokit_utils.ABITransactionResponse[None]:
+        """Calls `ponuda(pay)void` ABI method
+        
+        :param TransactionWithSigner uplata: The `uplata` ABI parameter
+        :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
+        :returns algokit_utils.ABITransactionResponse[None]: The result of the transaction"""
+
+        args = PonudaArgs(
+            uplata=uplata,
+        )
+        result = self.app_client.call(
+            call_abi_method=args.method(),
+            transaction_parameters=_convert_call_transaction_parameters(transaction_parameters),
+            **_as_dict(args, convert_all=True),
+        )
+        return result
+
     def create_bare(
         self,
         *,
@@ -389,6 +652,22 @@ class AukcijaClient:
         result = self.app_client.create(
             call_abi_method=False,
             transaction_parameters=_convert_create_transaction_parameters(transaction_parameters, on_complete),
+        )
+        return result
+
+    def opt_in_bare(
+        self,
+        *,
+        transaction_parameters: algokit_utils.TransactionParameters | None = None,
+    ) -> algokit_utils.TransactionResponse:
+        """Calls the opt_in bare method
+        
+        :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
+        :returns algokit_utils.TransactionResponse: The result of the transaction"""
+
+        result = self.app_client.opt_in(
+            call_abi_method=False,
+            transaction_parameters=_convert_transaction_parameters(transaction_parameters),
         )
         return result
 
