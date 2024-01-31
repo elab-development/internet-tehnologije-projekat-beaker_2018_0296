@@ -1,0 +1,41 @@
+#pragma version 8
+intcblock 0
+txn NumAppArgs
+intc_0 // 0
+==
+bnz main_l2
+err
+main_l2:
+txn OnCompletion
+intc_0 // NoOp
+==
+bnz main_l4
+err
+main_l4:
+txn ApplicationID
+intc_0 // 0
+==
+assert
+callsub create_0
+pushint 1 // 1
+return
+
+// create
+create_0:
+proto 0 0
+pushbytes 0x6b72616a5f61756b63696a65 // "kraj_aukcije"
+intc_0 // 0
+app_global_put
+pushbytes 0x70726574686f646e615f706f6e756461 // "prethodna_ponuda"
+intc_0 // 0
+app_global_put
+pushbytes 0x70726574686f646e6a695f706f6e75646a6163 // "prethodnji_ponudjac"
+pushbytes 0x // ""
+app_global_put
+pushbytes 0x746f6b656e // "token"
+intc_0 // 0
+app_global_put
+pushbytes 0x746f6b656e5f6964 // "token_id"
+intc_0 // 0
+app_global_put
+retsub

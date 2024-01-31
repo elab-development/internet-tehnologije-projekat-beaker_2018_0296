@@ -1,0 +1,67 @@
+{
+    "hints": {},
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDgKaW50Y2Jsb2NrIDAKdHhuIE51bUFwcEFyZ3MKaW50Y18wIC8vIDAKPT0KYm56IG1haW5fbDIKZXJyCm1haW5fbDI6CnR4biBPbkNvbXBsZXRpb24KaW50Y18wIC8vIE5vT3AKPT0KYm56IG1haW5fbDQKZXJyCm1haW5fbDQ6CnR4biBBcHBsaWNhdGlvbklECmludGNfMCAvLyAwCj09CmFzc2VydApjYWxsc3ViIGNyZWF0ZV8wCnB1c2hpbnQgMSAvLyAxCnJldHVybgoKLy8gY3JlYXRlCmNyZWF0ZV8wOgpwcm90byAwIDAKcHVzaGJ5dGVzIDB4NmI3MjYxNmE1ZjYxNzU2YjYzNjk2YTY1IC8vICJrcmFqX2F1a2NpamUiCmludGNfMCAvLyAwCmFwcF9nbG9iYWxfcHV0CnB1c2hieXRlcyAweDcwNzI2NTc0Njg2ZjY0NmU2MTVmNzA2ZjZlNzU2NDYxIC8vICJwcmV0aG9kbmFfcG9udWRhIgppbnRjXzAgLy8gMAphcHBfZ2xvYmFsX3B1dApwdXNoYnl0ZXMgMHg3MDcyNjU3NDY4NmY2NDZlNmE2OTVmNzA2ZjZlNzU2NDZhNjE2MyAvLyAicHJldGhvZG5qaV9wb251ZGphYyIKcHVzaGJ5dGVzIDB4IC8vICIiCmFwcF9nbG9iYWxfcHV0CnB1c2hieXRlcyAweDc0NmY2YjY1NmUgLy8gInRva2VuIgppbnRjXzAgLy8gMAphcHBfZ2xvYmFsX3B1dApwdXNoYnl0ZXMgMHg3NDZmNmI2NTZlNWY2OTY0IC8vICJ0b2tlbl9pZCIKaW50Y18wIC8vIDAKYXBwX2dsb2JhbF9wdXQKcmV0c3Vi",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDgKcHVzaGludCAwIC8vIDAKcmV0dXJu"
+    },
+    "state": {
+        "global": {
+            "num_byte_slices": 1,
+            "num_uints": 4
+        },
+        "local": {
+            "num_byte_slices": 0,
+            "num_uints": 1
+        }
+    },
+    "schema": {
+        "global": {
+            "declared": {
+                "kraj_aukcije": {
+                    "type": "uint64",
+                    "key": "kraj_aukcije",
+                    "descr": ""
+                },
+                "prethodna_ponuda": {
+                    "type": "uint64",
+                    "key": "prethodna_ponuda",
+                    "descr": ""
+                },
+                "prethodnji_ponudjac": {
+                    "type": "bytes",
+                    "key": "prethodnji_ponudjac",
+                    "descr": ""
+                },
+                "token": {
+                    "type": "uint64",
+                    "key": "token",
+                    "descr": ""
+                },
+                "token_id": {
+                    "type": "uint64",
+                    "key": "token_id",
+                    "descr": ""
+                }
+            },
+            "reserved": {}
+        },
+        "local": {
+            "declared": {
+                "trazeni_iznos": {
+                    "type": "uint64",
+                    "key": "trazeni_iznos",
+                    "descr": ""
+                }
+            },
+            "reserved": {}
+        }
+    },
+    "contract": {
+        "name": "aukcija",
+        "methods": [],
+        "networks": {}
+    },
+    "bare_call_config": {
+        "no_op": "CREATE"
+    }
+}
